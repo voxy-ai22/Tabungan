@@ -1,0 +1,8 @@
+{
+  "name": "Celengan Digital",
+  "description": "A daily savings tracker with Brutalist design, multiple themes, and PWA capabilities to help you reach your financial goals.",
+  "requestFramePermissions": [
+    "notifications"
+  ],
+  "majorCapabilities": []
+}
