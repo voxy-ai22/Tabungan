@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    --bg: #ffffff;
+    --ink: #000000;
+  }
+
+  .dark {
+    --bg: #000000;
+    --ink: #ffffff;
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--ink)] font-sans transition-colors duration-300;
+    min-height: 100dvh;
+  }
+}
+
+@layer components {
+  /* Theme: Brutalist (Creative Tool refined) */
+  .theme-brutalist {
+    --bg-accent: #E4E3E0;
+    --brutal-black: #141414;
+    --brutal-green: #00FF00;
+    --brutal-red: #FF4444;
+    --brutal-yellow: #FFFF00;
+    --brutal-pink: #FF00FF;
+  }
+
+  .theme-brutalist.bg-zinc-50 {
+    background-color: var(--bg-accent);
+    background-image: radial-gradient(var(--brutal-black) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .theme-brutalist .brutal-card {
+    @apply border-4 border-[#141414] bg-white shadow-[10px_10px_0px_0px_rgba(20,20,20,1)] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[14px_14px_0px_0px_rgba(20,20,20,1)];
+  }
+  
+  .theme-brutalist.dark .brutal-card {
+    @apply border-white bg-[#141414] shadow-[10px_10px_0px_0px_rgba(255,255,255,1)] hover:shadow-[14px_14px_0px_0px_rgba(255,255,255,1)];
+  }
+
+  .theme-brutalist .brutal-btn {
+    @apply border-2 border-[#141414] bg-white px-4 py-2 font-display font-black uppercase text-xs shadow-[4px_4px_0px_0px_rgba(20,20,20,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all;
+  }
+  
+  .theme-brutalist .brutal-btn-primary {
+    @apply bg-[#00FF00] text-[#141414];
+  }
+
+  .theme-brutalist .brutal-btn-danger {
+    @apply bg-[#FF4444] text-white;
+  }
+
+  .theme-brutalist.dark .brutal-btn {
+    @apply border-white bg-zinc-800 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)];
+  }
+
+  /* Theme: Glassmorphism */
+  .theme-glass .glass-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl transition-all hover:bg-white/15;
+  }
+  .theme-glass.dark .glass-card {
+    @apply bg-black/30 border-white/10;
+  }
+
+  .theme-glass .glass-btn {
+    @apply bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl px-4 py-2 transition-all hover:bg-white/30 active:scale-95;
+  }
+
+  /* Theme: Standard */
+  .theme-standard .std-card {
+    @apply bg-white rounded-lg border border-zinc-200 shadow-sm transition-all hover:shadow-md;
+  }
+  .theme-standard.dark .std-card {
+    @apply bg-zinc-900 border-zinc-800;
+  }
+
+  .theme-standard .std-btn {
+    @apply bg-zinc-900 text-white rounded-md px-4 py-2 transition-all hover:bg-zinc-800 active:scale-95;
+  }
+  .theme-standard.dark .std-btn {
+    @apply bg-white text-black hover:bg-zinc-100;
+  }
+
+  /* Theme: Retro / Y2K */
+  .theme-retro {
+    --retro-pink: #ff00ff;
+    --retro-blue: #00ffff;
+    --retro-silver: #c0c0c0;
+  }
+  .theme-retro .retro-card {
+    @apply bg-[#c0c0c0] border-[3px] border-white border-r-zinc-800 border-b-zinc-800 shadow-md p-4;
+  }
+  .theme-retro .retro-btn {
+    @apply bg-[#c0c0c0] border-2 border-white border-r-zinc-800 border-b-zinc-800 px-3 py-1 font-mono text-xs font-bold active:border-zinc-800 active:border-r-white active:border-b-white transition-all;
+  }
+  .theme-retro.dark {
+    @apply bg-indigo-950 text-sky-300;
+  }
+
+  /* Theme: Bento */
+  .theme-bento .bento-card {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-sm transition-all hover:shadow-xl hover:-translate-y-1;
+  }
+  .theme-bento .bento-btn {
+    @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white rounded-2xl px-6 py-2 font-medium transition-all hover:bg-zinc-200 dark:hover:bg-zinc-700 active:scale-95;
+  }
+}
+
+/* ── PWA / Settings Enhancements ── */
+
+/* Scrollbar styling for settings panel */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 99px;
+}
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+}
+
+/* Time input styling */
+input[type="time"] {
+  color-scheme: light;
+}
+.dark input[type="time"] {
+  color-scheme: dark;
+}
+
+/* Settings panel spring animation */
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+/* Theme preview card hover glow */
+.theme-preview-active {
+  box-shadow: 0 0 0 2px var(--accent), 0 8px 32px rgba(0,0,0,0.15);
+}
+
+/* Notification badge pulse */
+@keyframes notif-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.95); }
+}
+.notif-active-badge {
+  animation: notif-pulse 2s ease-in-out infinite;
+}
+
+/* Install hint shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.install-hint {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Better focus rings */
+button:focus-visible,
+input:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-blue-500;
+}
+
+/* Smooth theme transitions */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* But don't slow down transforms */
+button, a, [role="button"] {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, transform, opacity;
+}
