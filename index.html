@@ -1,13 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>Celengan Digital – Tabungan Harianmu</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00dc78" />
+    <meta name="description" content="Atur tabungan harianmu dengan mudah dan menyenangkan" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Celengan" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Celengan Digital" />
+    <meta property="og:description" content="Atur tabungan harianmu dengan mudah" />
+    <meta property="og:type" content="website" />
+
+    <!-- Register SW inline for reliability -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then((reg) => {
+              console.log('[App] SW registered:', reg.scope);
+              // Listen for SW updates
+              reg.addEventListener('updatefound', () => {
+                const newWorker = reg.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('[App] New SW available');
+                  }
+                });
+              });
+            })
+            .catch((err) => console.error('[App] SW registration failed:', err));
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
